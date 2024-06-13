@@ -18,6 +18,7 @@ function multiply(a, b) {
 let firstNum;
 let secondNum;
 let operator;
+let displayValue;
 
 function operate(operator, firstNum, secondNum) {
   switch(operator) {
@@ -28,3 +29,21 @@ function operate(operator, firstNum, secondNum) {
     default: return null;
   }
 }
+
+function updateDisplay(e) {
+  const input = document.querySelector('#input');
+  const inputValue = input.value;
+  const btnValue = e.target.textContent;
+  console.log('btnValue:', btnValue);
+  const result = inputValue === "0" ? btnValue : inputValue + btnValue;
+  console.log('result:', result);
+  input.value = result;
+  displayValue = result;
+}
+
+function configureBtnEventListeners() {
+  const buttons = document.querySelectorAll('button');
+  buttons.forEach(btn => btn.addEventListener('click', (e) => updateDisplay(e)));
+}
+
+window.onload = configureBtnEventListeners;
