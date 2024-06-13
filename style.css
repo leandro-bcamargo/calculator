@@ -14,7 +14,7 @@ button {
   flex-direction: column;
 }
 
-#input {
+#display {
   box-sizing: border-box;
   width: 150px;
   padding: 10px;
