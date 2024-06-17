@@ -29,10 +29,10 @@ function operate(firstNum, operator, secondNum) {
   }
 }
 
-function calculate(trailingOperator) {
+function calculate(trailingOperator = '') {
   const display = document.querySelector('#display');
   const [firstNum, operator, secondNum] = display.value.split(/([+\-/*])/);
-  console.log('firstNum:', firstNum, 'secondNum:', secondNum, 'operator:', operator);
+  // console.log('firstNum:', firstNum, 'secondNum:', secondNum, 'operator:', operator);
   display.value = '';
   const newDisplayValue = operate(Number(firstNum), operator, Number(secondNum));
   // console.log('newDisplayValue:', newDisplayValue)
@@ -44,30 +44,28 @@ function updateDisplay(e) {
   const inputValue = input.value;
   const btnValue = e.target.textContent;
   let result;
-  if (inputValue === '0') {
-    result = btnValue;
+
+  if (btnValue === 'C') {
+    result = '0';
+    operatorsCounter = 0;
   } else if (DIGITS.includes(btnValue)) {
-    console.log('test')
-    result = inputValue + btnValue;
-  } else if (OPERATORS.includes(btnValue)) {
-    console.log('Apertou operador')
-    operatorsCounter++;
-    console.log('counter:', operatorsCounter)
-    if (operatorsCounter > 1) {
-      console.log('entrou')
-      calculate(btnValue);
-      const displayValue = document.querySelector('#display').value;
-      console.log('displayValue:', displayValue)
-      const includesOperator = displayValue.split('').some(char => OPERATORS.includes(char));
-      operatorsCounter = includesOperator ? 1 : 0;
-      return;
+    if (inputValue === '0' || operatorsCounter > 1) {
+      result = btnValue;
     } else {
       result = inputValue + btnValue;
     }
+    operatorsCounter = 0;
+  } else if (OPERATORS.includes(btnValue)) {
+    if (operatorsCounter === 0 && inputValue !== '0') {
+      result = inputValue + btnValue;
+      operatorsCounter++;
+    } else {
+      result = inputValue;
+    }
   }
   input.value = result;
-  displayValue = result;
 }
+
 
 function configureBtnEventListeners() {
   const buttons = document.querySelectorAll('button');
@@ -75,6 +73,5 @@ function configureBtnEventListeners() {
     if (btn.textContent !== '=') btn.addEventListener('click', (e) => updateDisplay(e))
   });
 }
-
 
 window.onload = configureBtnEventListeners;
