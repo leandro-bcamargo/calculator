@@ -61,12 +61,18 @@ function updateDisplayEquals() {
   display.value = operate(num1, operator, num2);
 }
 
+function clearDisplay() {
+  const display = document.querySelector('#display');
+  display.value = '0';
+}
+
 function setUpEventListeners() {
   const buttons = document.querySelectorAll('button');
   buttons.forEach(btn => {
     if (DIGITS.includes(btn.textContent)) btn.addEventListener('click', (e) => updateDisplayNumber(e));
     if (OPERATORS.includes(btn.textContent)) btn.addEventListener('click', (e) => updateDisplayOperator(e));
     if (btn.textContent === '=') btn.addEventListener('click', updateDisplayEquals);
+    if (btn.textContent === 'C') btn.addEventListener('click', clearDisplay);
   })
 }
 
