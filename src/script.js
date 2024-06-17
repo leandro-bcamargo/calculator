@@ -19,7 +19,7 @@ const DIGITS = ['1','2','3','4','5','6','7','8','9','0'];
 const OPERATORS = ['+', '-', '/', '*'];
 let operatorsCounter = 0;
 
-function operate(num1, operator, num2) {
+function operate(num1 = 0, operator = '+', num2 = 0) {
   switch(operator) {
     case "+": return add(Number(num1), Number(num2));
     case "-": return subtract(Number(num1), Number(num2));
@@ -31,7 +31,6 @@ function operate(num1, operator, num2) {
 
 function parseDisplayValue(displayValue) {
   const [num1, operator, num2] = displayValue.split(/([+\-/*])/g);
-  console.log('num1:', num1, 'operator:', operator, 'num2:', num2);
   return [num1, operator, num2];
 }
 
@@ -55,72 +54,20 @@ function updateDisplayOperator(e) {
   }
 }
 
+function updateDisplayEquals() {
+  const display = document.querySelector('#display');
+  const displayValue = display.value;
+  const [num1, operator, num2] = parseDisplayValue(displayValue);
+  display.value = operate(num1, operator, num2);
+}
+
 function setUpEventListeners() {
   const buttons = document.querySelectorAll('button');
   buttons.forEach(btn => {
     if (DIGITS.includes(btn.textContent)) btn.addEventListener('click', (e) => updateDisplayNumber(e));
     if (OPERATORS.includes(btn.textContent)) btn.addEventListener('click', (e) => updateDisplayOperator(e));
+    if (btn.textContent === '=') btn.addEventListener('click', updateDisplayEquals);
   })
 }
 
 window.onload = setUpEventListeners;
-
-// function calculate() {
-//   const display = document.querySelector('#display');
-//   const expression = display.value;
-//   const lastChar = expression[expression.length - 1];
-
-//   // Check if the last character is an operator or a digit
-//   if (DIGITS.includes(lastChar)) {
-//     // If it's a digit, we can perform the calculation
-//     const [firstNum, operator, secondNum] = expression.split(/([+\-/*])/);
-//     display.value = operate(Number(firstNum), operator, Number(secondNum));
-//   } else if (OPERATORS.includes(lastChar)) {
-//     // If it's an operator, remove it before performing the calculation
-//     const newExpression = expression.slice(0, -1);
-//     const [firstNum, operator, secondNum] = newExpression.split(/([+\-/*])/);
-//     display.value = operate(Number(firstNum), operator, Number(secondNum)) + lastChar;
-//   }
-// }
-
-// function updateDisplay(e) {
-//   const input = document.querySelector('#display');
-//   const inputValue = input.value;
-//   const btnValue = e.target.textContent;
-
-//   if (btnValue === 'C') {
-//     input.value = '0';
-//     operatorsCounter = 0;
-//   } else if (DIGITS.includes(btnValue)) {
-//     if (inputValue === '0' || operatorsCounter > 0) {
-//       input.value = btnValue;
-//     } else {
-//       input.value += btnValue;
-//     }
-//     operatorsCounter = 0; // Reset the operators counter when a digit is pressed
-//   } else if (OPERATORS.includes(btnValue)) {
-//     if (operatorsCounter === 0 && inputValue !== '0') {
-//       input.value += btnValue;
-//       operatorsCounter++;
-//     } else if (operatorsCounter > 0) {
-//       // Perform calculation with existing expression
-//       const [firstNum, operator, secondNum] = inputValue.split(/([+\-/*])/);
-//       const result = operate(Number(firstNum), operator, Number(secondNum));
-//       input.value = result + btnValue; // Display result before next operator
-//       operatorsCounter = 1; // Reset counter for next operation
-//     }
-//   }
-// }
-
-
-
-
-
-// function configureBtnEventListeners() {
-//   const buttons = document.querySelectorAll('button');
-//   buttons.forEach(btn => {
-//     if (btn.textContent !== '=') btn.addEventListener('click', (e) => updateDisplay(e))
-//   });
-// }
-
-// window.onload = configureBtnEventListeners;
