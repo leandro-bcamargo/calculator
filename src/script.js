@@ -76,6 +76,12 @@ function replaceInitialZeroFromDisplay(enteredSymbol) {
   }
 }
 
+function handleDot() {
+  const display = document.querySelector('#display');
+  const displayValue = display.value;
+  display.value = displayValue + ".";
+}
+
 function setUpEventListeners() {
   const buttons = document.querySelectorAll('button');
   buttons.forEach(btn => {
@@ -83,6 +89,7 @@ function setUpEventListeners() {
     if (OPERATORS.includes(btn.textContent)) btn.addEventListener('click', (e) => updateDisplayOperator(e));
     if (btn.textContent === '=') btn.addEventListener('click', updateDisplayEquals);
     if (btn.textContent === 'C') btn.addEventListener('click', clearDisplay);
+    if (btn.textContent === '.') btn.addEventListener('click', handleDot);
   })
 }
 
