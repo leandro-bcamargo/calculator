@@ -38,6 +38,7 @@ function updateDisplayNumber(e) {
   const display = document.querySelector('#display');
   const displayValue = display.value;
   const enteredSymbol = e.target.textContent;
+  if (replaceInitialZeroFromDisplay(enteredSymbol)) return;
   display.value = displayValue + enteredSymbol;
 }
 
@@ -64,6 +65,15 @@ function updateDisplayEquals() {
 function clearDisplay() {
   const display = document.querySelector('#display');
   display.value = '0';
+}
+
+function replaceInitialZeroFromDisplay(enteredSymbol) {
+  const display = document.querySelector('#display');
+  const displayValue = display.value;
+  if (displayValue === '0') {
+    display.value = enteredSymbol;
+    return true;
+  }
 }
 
 function setUpEventListeners() {
