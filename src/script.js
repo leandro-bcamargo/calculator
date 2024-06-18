@@ -1,3 +1,8 @@
+
+const DIGITS = ['1','2','3','4','5','6','7','8','9','0'];
+const OPERATORS = ['+', '-', '/', '*'];
+let operatorsCounter = 0;
+
 function add(a, b) {
     return a + b;
 }
@@ -7,17 +12,15 @@ function subtract(a, b) {
 }
 
 function divide(a, b) {
-  if (b === 0) throw new Error('Cannot divide by zero.')
-  return a / b;
+  console.log('a:', a, 'b:', b)
+  if (b === 0) {
+    return "ERROR";
+  } else return parseFloat((a / b).toFixed(8));
 }
 
 function multiply(a, b) {
-  return a * b;
+  return parseFloat((a * b).toFixed(8));
 }
-
-const DIGITS = ['1','2','3','4','5','6','7','8','9','0'];
-const OPERATORS = ['+', '-', '/', '*'];
-let operatorsCounter = 0;
 
 function operate(num1 = 0, operator = '+', num2 = 0) {
   switch(operator) {
