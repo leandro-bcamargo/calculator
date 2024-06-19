@@ -8,6 +8,22 @@
   width: 100px;
 }
 
+.orange {
+  background-color: orange;
+}
+
+.blue {
+  background-color: cornflowerblue;
+}
+
+.lightblue {
+  background-color: lightskyblue;
+}
+
+.lightcoral {
+  background-color: lightcoral;
+}
+
 button {
   padding: 10px;
   width: 50px;
@@ -17,6 +33,9 @@ button {
 #outerDiv {
   display: flex;
   flex-direction: column;
+  border: 3px solid black;
+  box-sizing: border-box;
+  width: 205px;
 }
 
 #display {
