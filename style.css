@@ -3,6 +3,11 @@
   flex-direction: row;
 }
 
+.twiceWidth {
+  box-sizing: border-box;
+  width: 100px;
+}
+
 button {
   padding: 10px;
   width: 50px;
@@ -16,7 +21,7 @@ button {
 
 #display {
   box-sizing: border-box;
-  width: 150px;
+  width: 200px;
   padding: 10px;
 }
 
