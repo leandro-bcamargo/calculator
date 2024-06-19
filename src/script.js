@@ -82,7 +82,12 @@ function replaceInitialZeroFromDisplay(enteredSymbol) {
 function handleDot() {
   const display = document.querySelector('#display');
   const displayValue = display.value;
-  display.value = displayValue + ".";
+  const operands = displayValue.split(/([+\-/*])/g);
+  const currentOperand = operands[operands.length - 1];
+  const currentOperandIncludesDot = currentOperand.includes(".");
+  if (!currentOperandIncludesDot) {
+    display.value = displayValue + ".";
+  }
 }
 
 function setUpEventListeners() {
