@@ -90,6 +90,12 @@ function handleDot() {
   }
 }
 
+function handleBackspace() {
+  const display = document.querySelector('#display');
+  const displayValue = display.value;
+  display.value = displayValue.length === 1 ? "0" : displayValue.slice(0, -1); 
+}
+
 function setUpEventListeners() {
   const buttons = document.querySelectorAll('button');
   buttons.forEach(btn => {
@@ -98,6 +104,7 @@ function setUpEventListeners() {
     if (btn.textContent === '=') btn.addEventListener('click', updateDisplayEquals);
     if (btn.textContent === 'C') btn.addEventListener('click', clearDisplay);
     if (btn.textContent === '.') btn.addEventListener('click', handleDot);
+    if (btn.textContent === '←') btn.addEventListener('click', handleBackspace);
   })
 }
 
